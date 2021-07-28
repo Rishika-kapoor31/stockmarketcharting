@@ -1,0 +1,46 @@
+<mat-card *ngIf="userType == 'ADMIN' ">
+    <mat-action-list>
+        <div class="row">
+            <mat-nav-list >
+        <button mat-list-item 
+        routerLink="admin/import">
+            <mat-icon mat-list-icon>upload_file</mat-icon>Import Data
+        </button>
+        <button mat-list-item  routerLink="admin/company">
+            <mat-icon mat-list-icon>manage_search</mat-icon>Manage Company
+        </button>
+        <button mat-list-item routerLink="admin/exchange" >
+            <mat-icon mat-list-icon>manage_search</mat-icon>Manage Exchange
+        </button>
+        <button mat-list-item  routerLink="admin/ipo">
+            <mat-icon mat-list-icon>update</mat-icon>Update IPO Details
+        </button>
+    </mat-nav-list>
+    </div>
+    </mat-action-list>
+</mat-card>
+
+<mat-card *ngIf="userType == 'USER' ">
+    <mat-action-list>
+        <div class="row">
+            <mat-nav-list >
+        <button mat-list-item routerLink="user/profile" >
+           
+            <mat-icon mat-list-icon>person</mat-icon>Profile
+        </button>
+        <button mat-list-item  routerLink="user/ipo">
+            <mat-icon mat-list-icon>view_list</mat-icon>IPOs
+        </button>
+        <!-- <button mat-list-item routerLink="user/compare">
+            <mat-icon mat-list-icon>compare</mat-icon>Compare Company
+        </button> -->
+        <button mat-list-item routerLink="user/view-companies">
+            <mat-icon mat-list-icon>view_module</mat-icon>View All Companies
+        </button>      
+    </mat-nav-list>
+    </div>
+
+
+
+    </mat-action-list>
+</mat-card>

@@ -1,0 +1,29 @@
+
+    <header class="sticky-top mb-2 shadow-md">
+        <div class="container pt-4 pb-3" id="header">
+            <div class="titl"><a id="logo" routerLink="">Stock Market Charting</a></div>
+            <div class="auth-buttons  text-center float-end " style="float: right;" *ngIf="currentUser; else elseBlock">
+                <a routerLink="logout" (click)="logout()" class="btn btn-outline-dark ">Logout</a>
+            </div>
+            <ng-template #elseBlock>
+                <div class="auth-buttons  " style="float: right; ">
+                    <a routerLink="login" class="btn btn-outline-dark  "  style="margin-top: 5px; margin-right: 10px;"routerLinkActive="active">Login</a>
+                    <a routerLink="register" class="btn btn-outline-dark " style="margin-top: 5px;" routerLinkActive="active">Register</a>
+                </div>
+            </ng-template>
+        </div>
+        
+    </header>
+
+    <div>  
+        <div class="offcanvas offcanvas-bottom" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="topBar" style="max-height:15%;" *ngIf="currentUser">
+            <label type="button" class="btn-close text-reset w-100" data-bs-dismiss="offcanvas" aria-label="Close" id="sideNavCloseBtn"></label>    
+            <div class="offcanvas-body navstyle column" style="margin-right: 10px;">
+                <app-navbar></app-navbar>
+            </div>
+          </div>
+        <div class="container column" >
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+ 

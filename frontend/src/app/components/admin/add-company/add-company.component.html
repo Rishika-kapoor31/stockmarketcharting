@@ -1,0 +1,99 @@
+<div class="card col-md-8 offset-md-2 mt-3" >
+    <div class="card-body">
+        <ng-content></ng-content>
+    <h1 class="card-title">
+        <span *ngIf="update == true">Update Company</span> 
+        <span *ngIf="update == false">Add Company</span> 
+    </h1>
+
+    <form [formGroup]="addCompanyForm" >
+        <div class="row">
+            <label for="companyName">Company Name</label>
+            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': this.addCompanyForm.get('companyName').invalid && this.addCompanyForm.get('companyName').touched}"
+                formControlName="companyName" id="companyName" placeholder="Company Name" required >
+            
+            <div *ngIf="this.addCompanyForm.get('companyName').invalid && (this.addCompanyForm.get('companyName').dirty || this.addCompanyForm.get('companyName').touched)"
+                class="invalid-feedback">
+                <div *ngIf="this.addCompanyForm.get('companyName').errors?.required">
+                    Company Name is required.
+                </div>
+            </div>
+    
+        
+       <label for="stockExchanges">Select Stock Exchange</label>   
+            <input class="form-control" type="text" [ngClass]="{ 'is-invalid': this.addCompanyForm.get('stockExchanges').invalid && this.addCompanyForm.get('stockExchanges').touched}"
+             id="stockExchanges" placeholder="Select stockExchanges" formControlName="stockExchanges" required readonly="readonly"> 
+           
+            <div class="conatiner" style="overflow-x:auto;overflow-y:hidden; white-space: nowrap;">
+                <div *ngIf="stockExchanges && stockExchanges.length">
+                <div class="form-check-inline float-none" *ngFor="let se of stockExchanges;let fg of cSEMap.controls; let i=index;">
+                    <div class="form-group" [formGroup] = "getfgat(i)" >
+                        <input type="checkbox" formControlName="se" (click) = "setStockExchanges(stockExchanges[i].stockExchangeName,$event.target)" />
+                        {{ stockExchanges[i].stockExchangeName}}
+                        <input type="text" formControlName="stockCode" placeholder="Stock Code Here" />
+                    </div>
+                </div> 
+            </div> 
+               
+        </div>
+            <div *ngIf="this.addCompanyForm.get('stockExchanges').invalid && (this.addCompanyForm.get('stockExchanges').dirty || this.addCompanyForm.get('stockExchanges').touched)"
+                class="invalid-feedback">
+                <div *ngIf="this.addCompanyForm.get('stockExchanges').errors?.required">
+                    stockExchanges is required.
+                </div>
+            </div>
+        
+
+        <label for="sector">Select Sector</label>
+            <select class="form-control form-select"  [ngClass]="{ 'is-invalid': this.addCompanyForm.get('sector').invalid && this.addCompanyForm.get('sector').touched}"
+             id="sector" placeholder="Select sector" formControlName="sector" required>
+         
+                <option selected>Choose the sector</option>
+                <option *ngFor="let sector of sectors" value="{{ sector.sectorName }}">{{ sector.sectorName }}</option>
+            </select>
+          
+            <div *ngIf="this.addCompanyForm.get('sector').invalid && (this.addCompanyForm.get('sector').dirty || this.addCompanyForm.get('sector').touched)"
+                class="invalid-feedback">
+                <div *ngIf="this.addCompanyForm.get('sector').errors?.required">
+                    sector is required.
+                </div>
+            </div>
+
+
+
+            <label for="turnover">Turnover</label>
+            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': this.addCompanyForm.get('turnover').invalid}"
+                id="turnover" formControlName="turnover" placeholder="Enter the Turnover">
+           
+            <div *ngIf="this.addCompanyForm.get('turnover').invalid && (this.addCompanyForm.get('turnover').touched)"
+                class="invalid-feedback">
+                <div *ngIf="this.addCompanyForm.get('turnover').errors?.pattern">
+                    turnover contains only numbers.
+                </div>
+            </div>
+       
+            <label for="ceo">CEO</label>
+        
+            <input type="text" class="form-control" 
+                id="ceo" formControlName="ceo" placeholder="CEO">
+            
+      
+                <label for="boardOfDirectors">Board Of Directors</label>
+       
+            <input type="text" class="form-control" 
+                id="boardOfDirectors" formControlName="boardOfDirectors" placeholder="Board Of Directors">
+        
+        
+                <label for="details">Details</label>
+            <textarea type="text" class="form-control" 
+                id="details" formControlName="details" placeholder="Details"></textarea>
+            
+        
+       
+        <button class="btn btn-success " [disabled]="!addCompanyForm.valid" (click)="onSubmit()" style="margin-top: 10px;">Add</button> 
+            <button class="btn btn-warning" type="reset" style="margin-left: 10px; margin-top: 10px;">Reset</button>
+    </div>
+    </form>
+    
+</div>
+</div>

@@ -1,0 +1,54 @@
+<div class="card-body" style="background-color: lightcyan;">
+    <h2 class="card-title">Manage Companies</h2>
+    <div class="d-flex justify-content-evenly">
+        <button type="button" class="btn btn-dark " (click)="getAllComapnies()" style="margin-right: 10px; margin-bottom: 20px;">All Companies</button>
+        <div class="d-grid"><button type="button" class="btn btn-dark " (click)="addCompany() " style="margin-bottom: 20px;"><mat-icon>add</mat-icon></button></div>
+    </div>
+    <app-add-company *ngIf="showCompanyForm" #addCompanyForm [update]="update" [companyToBeUpdated]="companyToBeUpdated" (successSubmission)="addCompanySuccess($event)">
+        <button type="button" class="btn btn-dark  float-end" (click)="addCompany()">X</button>
+    </app-add-company>
+    
+
+    <div class="form-floating" >
+        <input type="text" class="form-control" style="width:40%" id="searchCompany" placeholder="Search For Companies Here"
+         [(ngModel)]="searchCompany" (ngModelChange)="search()">
+        
+    </div>
+    <div class="conatiner" *ngIf="CompanyList && CompanyList.length">
+        
+        <table class="table" >
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">SNo.</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Stock Exchanges</th>
+                    <th scope="col">Sector</th>
+                    <th scope="col">Turnover</th>
+                    <th scope="col">CEO</th>
+                    <th scope="col">Board Of Directors</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Update/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of CompanyList | slice: (page-1) * pageSize : page * pageSize; let i=index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ company.companyName }}</td>
+                    <td><span *ngFor="let se of company.stockCodes">{{ se.stockExchange.stockExchangeName }},</span></td>
+                    <td>{{ company.sector.sectorName }}</td>
+                    <td>{{ company.turnover }}</td>
+                    <td>{{ company.ceo }}</td>
+                    <td>{{ company.boardOfDirectors }}</td>
+                    <td>{{ company.details }}</td>
+                    <td><div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" (click)="updateCompany(company)" style="margin-right: 5px;">Update</button>
+                        <button type="button" class="btn btn-danger" (click)="deleteCompany(company)">Delete</button>
+                      </div></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="CompanyList.length"></ngb-pagination>
+        </div>
+    </div>
+</div>

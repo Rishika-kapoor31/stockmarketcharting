@@ -1,0 +1,48 @@
+<div class="card-body" style="background-color: lightcyan;">
+    <h2 class="card-title">Manage Exchanges</h2>
+    <div class="d-flex justify-content-evenly">
+        <button type="button" class="btn btn-dark " (click)="getAllexchanges()" style="margin-right: 20px; margin-bottom: 20px; ">Exchanges</button>
+        <div class="d-grid"><button type="button" class="btn btn-dark" (click)="addExchange()" style="margin-bottom: 20px;"><mat-icon>add</mat-icon></button></div>
+    </div>
+    <app-add-stock-exchange *ngIf="showExchangeForm" #addExchangeForm>
+        <button type="button" class="btn btn-dark  float-end" (click)="addExchange()">X</button>
+    </app-add-stock-exchange>
+    
+
+    <div class="form-floating" >
+        <!-- <input list="seDatalist" class="form-control" id="searchExchanges" placeholder="Search For Exchanges Here" required>
+        <label for="searchExchanges">Search For Exchanges Here</label> -->
+        <input type="text" class="form-control" style="width: 30%;" id="searchExchange" placeholder="Search For Exchanges "
+            [(ngModel)]="searchExchange" (ngModelChange)="search()">
+      
+    </div>
+    
+    <div class="conatiner" *ngIf="ExchangeList && ExchangeList.length">
+        
+        <table class="table" >
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">S.no.</th>
+                    <th scope="col">StockExchangeName</th>
+                    <th scope="col">Brief</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Remarks</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exchange of ExchangeList | slice: (page-1) * pageSize : page * pageSize; let i=index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ exchange.stockExchangeName }}</td>
+                    <td>{{ exchange.brief }}</td>
+                    <td>{{ exchange.contactAddress }}</td>
+                    <td>{{ exchange.remarks }}</td>
+            
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="ExchangeList.length"></ngb-pagination>
+        </div>
+    </div>
+</div>

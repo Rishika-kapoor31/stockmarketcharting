@@ -1,0 +1,70 @@
+   <div class="card-body col-md-6 offset-md-3 mt-5">
+            <div class="card">
+            <h4 class="card-header"> <i class="fa fa-lock"></i>Register</h4>
+            <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-floating mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" [ngClass]="{ 'is-invalid': this.registerForm.get('username').invalid || submitted}"
+                        formControlName="username" id="username" placeholder="Username" required>
+                    
+                    <div *ngIf="this.registerForm.get('username').invalid && (this.registerForm.get('username').dirty || this.registerForm.get('username').touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="this.registerForm.get('username').errors?.required">
+                            Username is required.
+                        </div>
+                        <div *ngIf="this.registerForm.get('username').errors?.minlength">
+                            Username must be at least 4 characters long.
+                        </div>
+
+                        <div *ngIf="submitted">
+                            Username already taken, try different.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control"  [ngClass]="{ 'is-invalid': this.registerForm.get('password').invalid}"
+                        id="password" formControlName="password" placeholder="Password" required>
+                   
+                    <div *ngIf="this.registerForm.get('password').invalid && (this.registerForm.get('password').dirty || this.registerForm.get('password').touched)"
+                        class="invalid-feedback">
+
+                        <div *ngIf="this.registerForm.get('password').errors?.required">
+                            Password is required.
+                        </div>
+                        <div *ngIf="this.registerForm.get('password').errors?.pattern || this.registerForm.get('password').errors?.minlength">
+                            Password must be at least 8 characters long and must contain at least one uppercase, one lowercase, and one number.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" [ngClass]="{ 'is-invalid': this.registerForm.get('email').invalid || submitted}"
+                        id="email" formControlName="email" placeholder="Email" required>
+                   
+                    <div *ngIf="this.registerForm.get('email').invalid && (this.registerForm.get('email').dirty || this.registerForm.get('email').touched)"
+                        class="invalid-feedback">
+
+                        <div *ngIf="this.registerForm.get('email').errors?.required">
+                            Email address is required.
+                        </div>
+                        <div *ngIf="this.registerForm.get('email').errors?.pattern">
+                            Invalid Email.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" placeholder="Mobile Number">
+                   
+                </div>
+                <button type="submit" class="btn btn-outline-dark" >Register</button> 
+            </form>
+            <span>Login <a routerLink="../login"><b>HERE</b> </a></span> 
+        </div>
+        </div>
+    </div>
+

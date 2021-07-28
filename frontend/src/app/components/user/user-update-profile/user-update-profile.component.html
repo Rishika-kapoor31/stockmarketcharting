@@ -1,0 +1,85 @@
+<!-- <div class="card" style="background-color: lightcyan;">
+    <dl class="row card-body">
+        <dt class="col-sm-3">Username</dt>
+        <dd class="col-sm-1">:</dd>
+        <dd class="col-sm-8">{{ currentUser.username }}</dd>
+      
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-1">:</dd>
+        <dd class="col-sm-8">{{ currentUser.email }}</dd>
+    
+        <dt class="col-sm-3">Mobile Number</dt>
+        <dd class="col-sm-1">:</dd>
+        <dd class="col-sm-8">
+            <div *ngIf="currentUser.mobileNumber; Else elseBlock">{{ currentUser.mobileNumber }}</div>
+            <ng-template #elseBlock>
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Add Number
+                </button>
+            </ng-template>
+            <div class="collapse" id="collapseExample">
+                <br><input type="text" [(ngModel)]="mobileNumber">
+                <button (click)="addMobileNumber()" >Add Mobile Number</button>
+            </div>
+        </dd>
+    
+        <dt class="col-sm-3">Type</dt>
+        <dd class="col-sm-1">:</dd>
+        <dd class="col-sm-8">{{ currentUser.userType }}</dd>
+    
+        <dt class="col-sm-3">Password</dt>
+        <dd class="col-sm-1">:</dd>
+        <dd class="col-sm-8">
+            <input type="password" [(ngModel)]="newPassword">
+            <button (click)="updatePassword()">Change Password</button>
+        </dd>    
+    </dl>
+</div> -->
+<mat-card style="background-color: lightcyan;" >
+    
+    <mat-card-content>
+<div class="bootstrap-wrapper">
+    <div class="container">
+
+        <!-- <div class="container text-center">
+           
+         <img src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w"
+          alt=""
+          class="profile-image">
+        </div> -->
+        <div class="row ">
+        <div class="col-md-8 offset-md-1 ">
+          <table class="table text-center">
+            <tr>
+                <td>Username</td>
+                <td>{{currentUser.username}}</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" [(ngModel)]="newPassword">
+                   </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{currentUser.email}}</td>
+            </tr>
+            <tr>
+                <td>Mobile No</td>
+                <td>{{currentUser.mobileNumber}}</td>
+            </tr>
+           
+
+
+          </table>
+              
+        </div>
+    </div>
+    </div>
+</div>
+
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button  color="primary" (click)="updatePassword()">Update</button>
+        
+      </mat-card-actions>
+</mat-card>
